@@ -122,8 +122,8 @@ API_PORT = 8000
 爬虫爬取和检测ip的设置条件
 不需要检测ip是否已经存在，因为会定时清理
 '''
-UPDATE_TIME = 30 * 60  # 每半个小时检测一次是否有代理ip失效
-MINNUM = 50  # 当有效的ip值小于一个时 需要启动爬虫进行爬取
+UPDATE_TIME = 15 * 60  # 每半个小时检测一次是否有代理ip失效
+MINNUM = 150  # 当有效的ip值小于一个时 需要启动爬虫进行爬取
 
 TIMEOUT = 5  # socket延时
 '''
@@ -196,7 +196,7 @@ TEST_HTTPS_HEADER = 'https://httpbin.org/get'
 #因此在这个地方用户可以自己添加检测函数,我以百度为访问网址尝试一下
 #大家可以看一下Validator.py文件中的baidu_check函数和detect_proxy函数就会明白
 
-CHECK_PROXY={'function':'checkProxy'}#{'function':'baidu_check'}
+CHECK_PROXY={'function':'v2ex_check'}#{'function':'baidu_check'}
 
 #下面配置squid,现在还没实现
 #SQUID={'path':None,'confpath':'C:/squid/etc/squid.conf'}

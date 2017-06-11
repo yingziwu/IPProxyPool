@@ -3,6 +3,7 @@ import sys
 
 import chardet
 from gevent import monkey
+from symbol import except_clause
 monkey.patch_all()
 
 import json
@@ -130,6 +131,23 @@ def checkProxy(selfip, proxies):
         speed = -1
     return protocol, types, speed
 
+def v2ex_check(selfip, proxies):
+    protocol, types, speed=checkProxy(selfip, proxies)
+    if protocol == -1:
+        return protocol, types, speed
+    try:
+        start = time.time()
+        resp=requests.get(url='https://www.v2ex.com',headers=config.get_header(), timeout=config.TIMEOUT, proxies=proxies)
+        resp.encoding=chardet.detect(resp.content)['encoding']
+        if resp.status_code == 200:
+            speed = round(time.time() - start, 2)
+        else:
+            protocol = -1
+    except Exception as e:
+            speed = -1
+            protocol = -1
+            types = -1
+    return protocol, types, speed
 
 def _checkHttpProxy(selfip, proxies, isHttp=True):
     types = -1

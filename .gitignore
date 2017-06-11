@@ -89,3 +89,8 @@ ENV/
 .ropeproject
 .idea/
 *.db
+.pydevproject
+.settings
+bin
+include
+.project
